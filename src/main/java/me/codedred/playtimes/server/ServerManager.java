@@ -93,7 +93,7 @@ public class ServerManager {
       .getConfigurationSection("leaderboard")
       .getKeys(false)) {
       if (
-        Bukkit.getServer().getOfflinePlayer(UUID.fromString(key)).getName() ==
+        Bukkit.getOfflinePlayer(UUID.fromString(key)).getName() ==
         null
       ) data.getData().set("leaderboard." + key, null);
     }
