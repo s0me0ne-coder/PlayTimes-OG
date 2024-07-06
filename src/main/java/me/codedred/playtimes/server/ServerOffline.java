@@ -1,27 +1,17 @@
 package me.codedred.playtimes.server;
 import java.io.IOException;
 import java.util.UUID;
-
 import javax.annotation.Nullable;
-
 import org.bukkit.Bukkit;
 
-public class ServerOffline implements ServerStatus {
+public class ServerOffline {
 
-  @Override
   @Nullable
-  public UUID getUUID(String name) {
+  public static UUID getUUID(String name) {
     return Bukkit.getOfflinePlayer(name).getUniqueId();
   }
-
-  @Override
-  public boolean isOnline() {
-    return false;
-  }
-
-  @Override
   @Nullable
-  public String getName(UUID uuid) throws IOException {
+  public static String getName(UUID uuid) {
     return Bukkit.getOfflinePlayer(uuid).getName();
   }
 }
