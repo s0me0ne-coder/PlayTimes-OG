@@ -16,11 +16,8 @@ import me.codedred.playtimes.data.DataManager;
 import me.codedred.playtimes.data.database.manager.DatabaseManager;
 import me.codedred.playtimes.listeners.Join;
 import me.codedred.playtimes.listeners.Quit;
-import me.codedred.playtimes.server.ServerManager;
 import me.codedred.playtimes.statistics.StatManager;
 import me.codedred.playtimes.time.TimeManager;
-import me.codedred.playtimes.utils.ChatUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -29,7 +26,6 @@ public class PlayTimes extends JavaPlugin {
 
   @Override
   public void onEnable() {
-    ServerManager.getInstance().register();
     StatManager.getInstance().registerStatistics();
     TimeManager.getInstance().registerTimings();
 

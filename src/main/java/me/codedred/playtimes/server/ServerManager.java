@@ -1,6 +1,7 @@
 package me.codedred.playtimes.server;
 import java.util.UUID;
 import javax.annotation.Nullable;
+import org.bukkit.Bukkit;
 
 public class ServerManager {
 
@@ -12,19 +13,24 @@ public class ServerManager {
 
   @Nullable
   public UUID getUUID(String name) {
-    UUID id = ServerOnline.getUUID(name);
-    if (id == null) {
-      id = ServerOffline.getUUID(name);
+    if(Bukkit.getPlayer(name) != null) {
+      return Bukkit.getPlayer(name).getUniqueId();
+    } else if(Bukkit.getOfflinePlayer(name) != null) {
+      return Bukkit.getOfflinePlayer(name).getUniqueId();
+    } else {
+      return null;
     }
-    return id;
   }
 
+  @Nullable
   public String getName(UUID uuid) {
-    String name = ServerOnline.getName(uuid);
-    if(name == null) {
-      name = ServerOffline.getName(uuid);
+     if(Bukkit.getPlayer(uuid) != null) {
+      return Bukkit.getPlayer(uuid).getName();
+    } else if(Bukkit.getOfflinePlayer(uuid) != null) {
+      return Bukkit.getOfflinePlayer(uuid).getName();
+    } else {
+      return null;
     }
-    return name;
   }
   
 }

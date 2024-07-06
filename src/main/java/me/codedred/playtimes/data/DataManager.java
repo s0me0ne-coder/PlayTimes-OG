@@ -47,7 +47,6 @@ public class DataManager {
     data.reloadConfig();
     cfg.reloadConfig();
     db.reloadConfig();
-    ServerManager.getInstance().updateLookupType();
     if (hasAfkEnabled()) AFKManager.getInstance().reload();
   }
 

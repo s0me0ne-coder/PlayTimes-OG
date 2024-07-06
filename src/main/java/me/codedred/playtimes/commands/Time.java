@@ -111,8 +111,6 @@ public class Time implements CommandExecutor {
       ChatUtil.errno(sender, ChatUtil.ChatTypes.NO_PERMISSION);
       return;
     }
-    boolean isOnline = ServerManager.getInstance().isOnline();
-    String serverStatus = isOnline ? "Online" : "Offline";
 
     sender.sendMessage(ChatUtil.format("&6&l*** PlayTimes Version Info ***"));
     sender.sendMessage(
@@ -129,10 +127,6 @@ public class Time implements CommandExecutor {
       ChatColor.WHITE +
       StatManager.getInstance().name +
       ChatColor.GOLD +
-      "\nServer Status: " +
-      ChatColor.WHITE +
-      serverStatus +
-      ChatColor.GOLD +
       "\nDatabase connected: " +
       ChatColor.WHITE +
       DataManager.getInstance().hasDatabase() +
@@ -140,11 +134,8 @@ public class Time implements CommandExecutor {
       "\nAFK Status: " +
       ChatColor.WHITE +
       DataManager.getInstance().hasAfkEnabled() +
-      ChatColor.GOLD +
-      "\nUUID Lookup Type: " +
-      ChatColor.WHITE +
-      ServerManager.getInstance().lookupType()
-    );
+      ChatColor.GOLD
+      );
   }
 
   private void handlePlayerCommand(CommandSender sender) {
