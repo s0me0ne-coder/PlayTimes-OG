@@ -29,8 +29,6 @@ public class PlayTimes extends JavaPlugin {
 
   @Override
   public void onEnable() {
-    checkForUpdate();
-
     ServerManager.getInstance().register();
     StatManager.getInstance().registerStatistics();
     TimeManager.getInstance().registerTimings();
@@ -124,40 +122,5 @@ public class PlayTimes extends JavaPlugin {
         e.printStackTrace();
       }
     }
-  }
-
-  private void checkForUpdate() {
-    Bukkit
-      .getScheduler()
-      .runTaskAsynchronously(
-        this,
-        () -> {
-          UpdateChecker updater = new UpdateChecker(this, 58858);
-          try {
-            if (updater.hasUpdatesAvailable()) {
-              getLogger()
-                .warning(
-                  ChatUtil.format(
-                    "You are using an older version of PlayTimes!"
-                  )
-                );
-              getLogger()
-                .info(ChatUtil.format("Download the newest version here:"));
-              getLogger()
-                .info(
-                  ChatUtil.format("https://www.spigotmc.org/resources/58858/")
-                );
-            } else {
-              getLogger()
-                .info(
-                  "[PlayTimes] Plugin is up to date! - " +
-                  getDescription().getVersion()
-                );
-            }
-          } catch (IOException e) {
-            getLogger().warning("[PlayTimes] Could not check for updates!");
-          }
-        }
-      );
   }
 }
