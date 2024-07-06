@@ -47,7 +47,7 @@ public class ServerManager {
   }
 
   public String getName(UUID uuid) throws IOException {
-    return Bukkit.getPlayer(uuid).getName();
+    return getStatus().getName(uuid);
   }
 
   public boolean isOnline() {

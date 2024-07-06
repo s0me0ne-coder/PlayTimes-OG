@@ -16,7 +16,7 @@ public class ServerOnline implements ServerStatus {
 
   @Override
   public UUID getUUID(@NotNull String name) {
-    UUID uuid = Bukkit.getServer().getPlayer(name).getUniqueId();
+    UUID uuid = Bukkit.getServer().getOfflinePlayer(name).getUniqueId();
     if (!StatManager.getInstance().hasJoinedBefore(uuid)) {
       return null;
     }
@@ -30,7 +30,21 @@ public class ServerOnline implements ServerStatus {
 
   @Override
   public String getName(UUID uuid) throws IOException {
-    String new_name = Bukkit.getPlayer(uuid).getDisplayName();
-    return new_name;
+    try (
+      InputStream is = new URL("https://mcapi.ca/player/profile/" + uuid)
+        .openStream()
+    ) {
+      BufferedReader rd = new BufferedReader(
+        new InputStreamReader(is, StandardCharsets.UTF_8)
+      );
+      JsonElement root = JsonParser.parseReader(rd);
+
+      JsonObject rootObj = root.getAsJsonObject();
+
+      return rootObj.get("name").getAsString();
+    } catch (IOException e) {
+      e.printStackTrace();
+      return "User Not Found";
+    }
   }
 }
